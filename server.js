@@ -6,20 +6,19 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+// Fillout.com API details
+const API_KEY = 'sk_prod_TfMbARhdgues5AuIosvvdAC9WsA5kXiZlW8HZPaRDlIbCpSpLsXBeZO7dCVZQwHAY3P4VSBPiiC33poZ1tdUj2ljOzdTCCOSpUZ_3912';
+const FORM_ID = 'cLZojxk94ous'; // Using the demo form ID directly in the route might not be ideal for a flexible API design.
 
-app.get('/:formId/filteredResponses', async (req, res) => {
-  const { formId } = req.params;
-  const { page, pageSize, filters } = req.query;
-  const apiUrl = `https://www.fillout.com/api/v1/forms/${formId}/responses?page=${page}&pageSize=${pageSize}`;
-  const headers = { Authorization: 'Bearer YOUR_API_KEY_HERE' };
+app.get(`/${FORM_ID}/filteredResponses`, async (req, res) => {
+  const { page = 1, pageSize = 10, filters } = req.query;
+  const apiUrl = `https://www.fillout.com/api/v1/forms/${FORM_ID}/responses?page=${page}&pageSize=${pageSize}`;
+  const headers = { Authorization: `Bearer ${API_KEY}` };
 
   try {
     const response = await axios.get(apiUrl, { headers });
-    const filteredResponses = applyFilters(response.data.responses, JSON.parse(filters));
-    // Modify the response to include filtered totalResponses and pageCount
+    const responses = response.data.responses;
+    const filteredResponses = filters ? applyFilters(responses, JSON.parse(filters)) : responses;
     const result = {
       responses: filteredResponses,
       totalResponses: filteredResponses.length,
@@ -47,3 +46,7 @@ function applyFilters(responses, filters) {
     });
   });
 }
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

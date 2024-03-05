@@ -1,4 +1,5 @@
-![image](https://github.com/ns2772/Fillout-API-Server/assets/58448072/b18fce94-5832-437c-a526-784dc576cf51)# Fillout API Server 
+# Fillout API Server 
+
 ## Install dependencies 
 `npm i` 
 

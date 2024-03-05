@@ -1,5 +1,8 @@
 # Fillout API Server 
 
+## Technologies
+TypeScript, Node and Express
+
 ## Install dependencies 
 `npm i` 
 

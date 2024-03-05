@@ -17,7 +17,7 @@
 
 use the URL in the Postman, you can change the filters' values based on the original response. 
 
-Don't forget the Bearer Koken in Postman. 
+Don't forget to use the Bearer Token in Postman. 
 
 ![image](https://github.com/ns2772/Fillout-API-Server/assets/58448072/4b5228c5-55fa-4e3c-8985-6cd91919749b)
 
